@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioPelis - Tu Videoteca Digital</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<header>
+    <h1>Biblio<span>Pelis</span></h1>
+    <nav>
+        <button class="btn-primary" onclick="toggleForm()">+ Añadir Película</button>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="search-section">
+        <form th:action="@{/peliculas/buscar}" method="get" class="search-bar">
+            <select id="buscar-genero" name="idGenero">
+                <option value="">Todos los géneros</option>
+                <option th:each="g : ${genreList}"
+                        th:value="${g.idGenero}"
+                        th:text="${g.nombre}">Género
+                </option>
+            </select>
+            <input type="text" id="buscar-titulo" name="titulo" placeholder="Buscar por título...">
+            <button type="submit" class="btn-search">Buscar</button>
+        </form>
+    </section>
+
+    <section id="form-registro" class="form-container hidden">
+        <h2>Registrar Nueva Película</h2>
+        <form th:action="@{/peliculas/guardar}" method="post">
+            <div class="form-group">
+                <input type="text" name="titulo" placeholder="Título de la película" required>
+                <select name="genero.idGenero" required>
+                    <option value="">Selecciona Género</option>
+                    <option th:each="g : ${genreList}"
+                            th:value="${g.idGenero}"
+                            th:text="${g.nombre}">Género
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="url" name="urlThumnail" placeholder="URL Thumbnail (Imagen)">
+                <input type="url" name="urlVideo" placeholder="URL Video">
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn-save">Guardar Película</button>
+                <button type="button" class="btn-cancel" onclick="toggleForm()">Cancelar</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="movie-grid">
+        <article class="movie-card" th:each="p : ${peliculas}">
+            <div class="card-img">
+                <img th:src="${p.urlThumbnail != null ? p.urlThumbnail : 'https://via.placeholder.com/300x450'}"
+                     alt="Poster">
+                <span class="badge" th:text="${p.genero.nombre}">Género</span>
+            </div>
+            <div class="card-info">
+                <h3 th:text="${p.titulo}">Título de Película</h3>
+                <div class="card-buttons">
+                    <a th:href="@{/peliculas/detalle/{id}(id=${p.idPelicula})}" class="btn-detail">Ver Detalles</a>
+                </div>
+            </div>
+        </article>
+
+        <p th:if="${#lists.isEmpty(peliculas)}">No hay películas disponibles.</p>
+    </section>
+</main>
+
+<script>
+    function toggleForm() {
+        const form = document.getElementById('form-registro');
+        form.classList.toggle('hidden');
+    }
+</script>
+</body>
+</html>
