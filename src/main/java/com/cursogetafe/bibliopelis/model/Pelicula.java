@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 public class Pelicula {
 
-    public Pelicula(){};
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +16,21 @@ public class Pelicula {
     @ManyToOne
     @JoinColumn(name = "id_genero")
     private Genero genero;
+
+    public Pelicula(){};
+
+    public Pelicula(String titulo, String urlThumbnail, String urlVideo) {
+        this.titulo = titulo;
+        this.urlThumbnail = urlThumbnail;
+        this.urlVideo = urlVideo;
+    }
+
+//    public Pelicula(String titulo, String urlThumbnail, String urlVideo, Genero genero) {
+//        this.titulo = titulo;
+//        this.urlThumbnail = urlThumbnail;
+//        this.urlVideo = urlVideo;
+//        this.genero = genero;
+//    }
 
     public int getId() {
         return id;
@@ -62,10 +77,11 @@ public class Pelicula {
         return "Pelicula{" +
                 "id=" + id +
                 ", titulo='" + titulo + '\'' +
-                ", urlThumnail='" + urlThumbnail + '\'' +
+                ", urlThumbnail='" + urlThumbnail + '\'' +
                 ", urlVideo='" + urlVideo + '\'' +
                 ", genero=" + genero +
                 '}';
     }
-
 }
+
+

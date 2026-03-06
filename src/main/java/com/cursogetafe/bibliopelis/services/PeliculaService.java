@@ -16,5 +16,11 @@ public class PeliculaService {
     public List<Pelicula> getAllPeliculas(){
         return iPeliRepo.findAll();
     }
+
+    public Pelicula createpeli(Pelicula peli){
+         return iPeliRepo.save(peli);
+    }
+
+
 }
 

@@ -6,78 +6,80 @@
     <title>BiblioPelis - Tu Videoteca Digital</title>
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
-<body>
+<body style="background-color: #0a0b10; color: #e6edf3; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; padding: 0;">
 
-<header>
-    <h1>Biblio<span>Pelis</span></h1>
+<header style="padding: 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #30363d; background-color: #0a0b10;">
+    <h1 style="margin: 0; font-size: 1.8rem; letter-spacing: 2px;">
+        Biblio<span style="color: #00d2ff; text-shadow: 0 0 10px #00d2ff;">Pelis</span>
+    </h1>
     <nav>
-        <button class="btn-primary" onclick="toggleForm()">+ Añadir Película</button>
+        <a th:href="@{/crearpeli}"
+           style="background: linear-gradient(45deg, #007bbd, #00d2ff); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; font-weight: bold; display: inline-block;">
+            + Añadir Película
+        </a>
     </nav>
 </header>
 
-<main class="container">
-    <section class="search-section">
-        <form th:action="@{/peliculas/buscar}" method="get" class="search-bar">
-            <select id="buscar-genero" name="idGenero">
+<main class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+
+    <section class="search-section" style="margin: 2rem 0;">
+        <form th:action="@{/peliculas/buscar}" method="get"
+              style="display: flex; gap: 10px; background: #161b22; padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+            <select name="idGenero" style="background: #0d1117; border: 1px solid #30363d; color: white; padding: 10px; border-radius: 5px; flex-grow: 1;">
                 <option value="">Todos los géneros</option>
                 <option th:each="g : ${genreList}"
                         th:value="${g.idGenero}"
                         th:text="${g.nombre}">Género
                 </option>
             </select>
-            <input type="text" id="buscar-titulo" name="titulo" placeholder="Buscar por título...">
-            <button type="submit" class="btn-search">Buscar</button>
+            <input type="text" name="titulo" placeholder="Buscar por título..."
+                   style="background: #0d1117; border: 1px solid #30363d; color: white; padding: 10px; border-radius: 5px; flex-grow: 1;">
+            <button type="submit"
+                    style="background: linear-gradient(45deg, #007bbd, #00d2ff); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                Buscar
+            </button>
         </form>
     </section>
 
-    <section id="form-registro" class="form-container hidden">
-        <h2>Registrar Nueva Película</h2>
-        <form th:action="@{/peliculas/guardar}" method="post">
-            <div class="form-group">
-                <input type="text" name="titulo" placeholder="Título de la película" required>
-                <select name="genero.idGenero" required>
-                    <option value="">Selecciona Género</option>
-                    <option th:each="g : ${genreList}"
-                            th:value="${g.idGenero}"
-                            th:text="${g.nombre}">Género
-                    </option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="url" name="urlThumnail" placeholder="URL Thumbnail (Imagen)">
-                <input type="url" name="urlVideo" placeholder="URL Video">
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="btn-save">Guardar Película</button>
-                <button type="button" class="btn-cancel" onclick="toggleForm()">Cancelar</button>
-            </div>
-        </form>
-    </section>
+    <section class="movie-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; margin-top: 2rem;">
 
-    <section class="movie-grid">
-        <article class="movie-card" th:each="p : ${peliculas}">
-            <div class="card-img">
-                <img th:src="${p.urlThumbnail != null ? p.urlThumbnail : 'https://via.placeholder.com/300x450'}"
-                     alt="Poster">
-                <span class="badge" th:text="${p.genero.nombre}">Género</span>
+        <article class="movie-card" th:each="p : ${peliculas}"
+                 style="background: #161b22; border-radius: 12px; overflow: hidden; border: 1px solid #30363d; display: flex; flex-direction: column;">
+
+            <div class="card-img" style="position: relative; height: 350px;">
+                <img th:src="${p.urlThumbnail}"
+                     alt="Poster"
+                     style="width: 100%; height: 100%; object-fit: cover;"
+                     onerror="this.src='https://via.placeholder.com/300x450/0d1117/00d2ff?text=Sin+Imagen'">
+
+                <span class="badge" th:if="${p.genero != null}"
+                      th:text="${p.genero.nombre}"
+                      style="position: absolute; top: 10px; left: 10px; background: #00d2ff; color: #000; padding: 4px 10px; font-size: 0.75rem; font-weight: bold; border-radius: 4px;">
+                      Género
+                </span>
             </div>
-            <div class="card-info">
-                <h3 th:text="${p.titulo}">Título de Película</h3>
-                <div class="card-buttons">
-                    <a th:href="@{/peliculas/detalle/{id}(id=${p.idPelicula})}" class="btn-detail">Ver Detalles</a>
+
+            <div class="card-info" style="padding: 15px; text-align: center; flex-grow: 1; display: flex; flex-direction: column;">
+                <h3 th:text="${p.titulo}"
+                    style="margin: 0 0 25px 0; font-size: 1.1rem; color: #e6edf3; flex-grow: 1; display: flex; align-items: center; justify-content: center;">
+                    Título de Película
+                </h3>
+
+                <div class="card-buttons" style="margin-top: auto;">
+                    <a th:href="@{/peliculas/detalle/{id}(id=${p.id})}"
+                       style="background: linear-gradient(45deg, #007bbd, #00d2ff); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; font-weight: bold; display: block; transition: opacity 0.3s;">
+                        Ver Detalles
+                    </a>
                 </div>
             </div>
         </article>
 
-        <p th:if="${#lists.isEmpty(peliculas)}">No hay películas disponibles.</p>
     </section>
+
+    <div th:if="${#lists.isEmpty(peliculas)}" style="text-align: center; padding: 50px; color: #8b949e;">
+        <p>No hay películas disponibles.</p>
+    </div>
 </main>
 
-<script>
-    function toggleForm() {
-        const form = document.getElementById('form-registro');
-        form.classList.toggle('hidden');
-    }
-</script>
 </body>
 </html>
