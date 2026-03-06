@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Película | Admin</title>
+</head>
+<body style="background-color: #0a0b10; color: #e6edf3; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+
+<div class="form-wrapper" style="background-color: #161b22; padding: 40px; border-radius: 15px; border: 1px solid #00d2ff; box-shadow: 0 0 20px rgba(0, 210, 255, 0.1); width: 100%; max-width: 500px; text-align: center;">
+
+    <header class="form-header" style="margin-bottom: 30px;">
+        <h1 style="margin: 0 0 10px 0; font-size: 1.8rem; letter-spacing: 1px;">Nueva <span style="color: #00d2ff;">Película</span></h1>
+        <p style="color: #8b949e; font-size: 0.9rem; margin: 0;">Completa los datos para el catálogo</p>
+    </header>
+
+    <main class="form-content">
+        <form th:action="@{/crearpeli}" th:object="${peli}" method="post" style="display: flex; flex-direction: column; gap: 20px; align-items: center; margin-bottom: 20px;">
+
+            <div class="form-group" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <label for="titulo" style="margin-bottom: 8px; font-weight: bold; color: #8b949e;">Título de la Obra</label>
+                <input type="text" id="titulo" th:field="*{titulo}" placeholder="Ej: Interstellar"
+                       style="width: 100%; max-width: 350px; background: #0d1117; border: 1px solid #30363d; color: white; padding: 12px; border-radius: 6px; text-align: center; outline: none;">
+            </div>
+
+            <div class="form-group" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <label for="urlThumbnail" style="margin-bottom: 8px; font-weight: bold; color: #8b949e;">URL Carátula</label>
+                <input type="url" id="urlThumbnail" th:field="*{urlThumbnail}" placeholder="https://..."
+                       style="width: 100%; max-width: 350px; background: #0d1117; border: 1px solid #30363d; color: white; padding: 12px; border-radius: 6px; text-align: center; outline: none;">
+            </div>
+
+            <div class="form-group" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <label for="urlVideo" style="margin-bottom: 8px; font-weight: bold; color: #8b949e;">URL Tráiler</label>
+                <input type="url" id="urlVideo" th:field="*{urlVideo}" placeholder="https://..."
+                       style="width: 100%; max-width: 350px; background: #0d1117; border: 1px solid #30363d; color: white; padding: 12px; border-radius: 6px; text-align: center; outline: none;">
+            </div>
+
+            <div class="form-group" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <label for="genero" style="margin-bottom: 8px; font-weight: bold; color: #8b949e;">Categoría / Género</label>
+                <select id="genero" th:field="*{genero}" required
+                        style="width: 100%; max-width: 350px; background: #0d1117; border: 1px solid #30363d; color: white; padding: 12px; border-radius: 6px; text-align: center; cursor: pointer; appearance: none;">
+                    <option value="" disabled selected>Selecciona un género...</option>
+                    <option th:each="g : ${listaGeneros}"
+                            th:value="${g.idGenero}"
+                            th:text="${g.nombre}">Acción</option>
+                </select>
+            </div>
+
+            <button type="submit"
+                    style="background: linear-gradient(45deg, #007bbd, #00d2ff); color: white; border: none; padding: 12px 40px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; max-width: 350px; transition: 0.2s;">
+                Guardar Película
+            </button>
+        </form>
+
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <a th:href="@{/}"
+               style="display: block; width: 100%; max-width: 350px; padding: 10px; border: 1px solid #ff4b4b; color: #ff4b4b; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 0.9rem; transition: all 0.3s;">
+                Cancelar y Salir
+            </a>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>
