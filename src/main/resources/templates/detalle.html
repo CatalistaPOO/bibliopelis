@@ -36,12 +36,6 @@
                     ▶ Reproducir
                 </button>
 
-<!--                <form th:action="@{/deletePeli}" method="post" style="display: inline;">-->
-<!--                    <button type="submit" class="btn-delete"-->
-<!--                            style="background: #f85149; color: white; border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; cursor: pointer;">-->
-<!--                        Eliminar Película-->
-<!--                    </button>-->
-<!--                </form>-->
                 <form th:action="@{/deletePeli}" method="post" style="display: inline;">
                     <input type="hidden" name="id" th:value="${peli.id}" />
 
