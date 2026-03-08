@@ -21,7 +21,7 @@ class IPeliculaRepositoryTest {
         Pelicula peli = new Pelicula("Alien",
                 "https://m.media-amazon.com/images/I/81XhWRvtxdL._UF894,1000_QL80_.jpg",
                 "https://youtu.be/F5PUUOWKAh4?si=Z-mH2nykdcAdaSfM");
-        this.imr.createpeli(peli);
+        this.imr.createPeli(peli);
     }
 
 }

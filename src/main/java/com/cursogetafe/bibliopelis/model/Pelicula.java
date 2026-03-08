@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 @Entity
 public class Pelicula {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -24,13 +22,6 @@ public class Pelicula {
         this.urlThumbnail = urlThumbnail;
         this.urlVideo = urlVideo;
     }
-
-//    public Pelicula(String titulo, String urlThumbnail, String urlVideo, Genero genero) {
-//        this.titulo = titulo;
-//        this.urlThumbnail = urlThumbnail;
-//        this.urlVideo = urlVideo;
-//        this.genero = genero;
-//    }
 
     public int getId() {
         return id;

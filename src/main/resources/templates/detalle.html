@@ -1,35 +1,64 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle - BiblioPelis</title>
-    <link rel="stylesheet" href="style.css">
+    <title th:text="${peli != null ? peli.titulo : 'Detalle'} + ' - BiblioPelis'">Detalle - BiblioPelis</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
-<body class="detail-page">
+<body class="detail-page" style="background-color: #0a0b10; color: #e6edf3; font-family: sans-serif;">
 
-    <div class="container">
-        <a href="index.html" class="btn-back">← Volver</a>
-        
-        <div class="detail-wrapper">
-            <div class="detail-media">
-                <img src="https://via.placeholder.com/400x600" alt="Poster">
-            </div>
-            
-            <div class="detail-content">
-                <span class="genre-label">Ciencia Ficción</span>
-                <h1>Interstellar</h1>
-                <p class="description">
-                    Un grupo de científicos y exploradores, encabezados por el gran Cooper, se embarcan en un viaje espacial para encontrar un lugar con las condiciones necesarias para reemplazar a la Tierra y asegurar la supervivencia de la humanidad.
-                </p>
-                
-                <div class="action-bar">
-                    <button class="btn-play">▶ Reproducir</button>
-                    <button class="btn-delete">Eliminar Película</button>
-                </div>
+<div class="container" style="max-width: 1000px; margin: 0 auto; padding: 40px;">
+    <a th:href="@{/}" class="btn-back" style="color: #00d2ff; text-decoration: none;">← Volver al catálogo</a>
+
+    <div th:if="${peli != null}" class="detail-wrapper" style="display: flex; gap: 40px; margin-top: 30px;">
+
+        <div class="detail-media">
+            <img th:src="${peli.urlThumbnail}"
+                 th:alt="${peli.titulo}"
+                 style="width: 350px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"
+                 onerror="this.src='https://via.placeholder.com/400x600?text=Sin+Poster'">
+        </div>
+
+        <div class="detail-content" style="flex: 1;">
+            <span class="genre-label"
+                  th:if="${peli.genero != null}"
+                  th:text="${peli.genero.nombre}"
+                  style="background: #00d2ff; color: black; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.8rem;">
+                Género
+            </span>
+
+            <h1 th:text="${peli.titulo}" style="font-size: 3rem; margin: 15px 0;">Título</h1>
+
+            <div class="action-bar" style="margin-top: 30px; display: flex; gap: 15px;">
+                <button class="btn-play"
+                        style="background: #00d2ff; border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+                    ▶ Reproducir
+                </button>
+
+<!--                <form th:action="@{/deletePeli}" method="post" style="display: inline;">-->
+<!--                    <button type="submit" class="btn-delete"-->
+<!--                            style="background: #f85149; color: white; border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; cursor: pointer;">-->
+<!--                        Eliminar Película-->
+<!--                    </button>-->
+<!--                </form>-->
+                <form th:action="@{/deletePeli}" method="post" style="display: inline;">
+                    <input type="hidden" name="id" th:value="${peli.id}" />
+
+                    <button type="submit" class="btn-delete"
+                            style="background: #f85149; color: white; border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+                        Eliminar Película
+                    </button>
+                </form>
             </div>
         </div>
     </div>
+
+    <div th:unless="${peli != null}" style="text-align: center; margin-top: 50px;">
+        <h2>Lo sentimos, la película no existe.</h2>
+        <a th:href="@{/}" style="color: #00d2ff;">Volver al inicio</a>
+    </div>
+</div>
 
 </body>
 </html>

@@ -9,18 +9,27 @@ import java.util.List;
 @Service
 public class PeliculaService {
     private IPeliculaRepository iPeliRepo;
+
+    //inyeccion de IPeliculaRepository(herencia de JPARepository)
     public PeliculaService(IPeliculaRepository iPeliRepo) {
         this.iPeliRepo = iPeliRepo;
     }
 
-    public List<Pelicula> getAllPeliculas(){
+    public List<Pelicula> getAllPeliculas() {
         return iPeliRepo.findAll();
     }
 
-    public Pelicula createpeli(Pelicula peli){
-         return iPeliRepo.save(peli);
+    public Pelicula createPeli(Pelicula peli) {
+        return iPeliRepo.save(peli);
     }
 
+    public void deletePeli(Pelicula peli) {
+         iPeliRepo.deleteById(peli.getId());
+    }
+
+    public Pelicula getPeliById(int id) {
+        return iPeliRepo.findById(id).orElse(null);
+    }
 
 }
 

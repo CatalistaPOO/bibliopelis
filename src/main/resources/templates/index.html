@@ -25,7 +25,8 @@
     <section class="search-section" style="margin: 2rem 0;">
         <form th:action="@{/peliculas/buscar}" method="get"
               style="display: flex; gap: 10px; background: #161b22; padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-            <select name="idGenero" style="background: #0d1117; border: 1px solid #30363d; color: white; padding: 10px; border-radius: 5px; flex-grow: 1;">
+            <select name="idGenero"
+                    style="background: #0d1117; border: 1px solid #30363d; color: white; padding: 10px; border-radius: 5px; flex-grow: 1;">
                 <option value="">Todos los géneros</option>
                 <option th:each="g : ${genreList}"
                         th:value="${g.idGenero}"
@@ -41,7 +42,8 @@
         </form>
     </section>
 
-    <section class="movie-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; margin-top: 2rem;">
+    <section class="movie-grid"
+             style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; margin-top: 2rem;">
 
         <article class="movie-card" th:each="p : ${peliculas}"
                  style="background: #161b22; border-radius: 12px; overflow: hidden; border: 1px solid #30363d; display: flex; flex-direction: column;">
@@ -59,15 +61,20 @@
                 </span>
             </div>
 
-            <div class="card-info" style="padding: 15px; text-align: center; flex-grow: 1; display: flex; flex-direction: column;">
+            <div class="card-info"
+                 style="padding: 15px; text-align: center; flex-grow: 1; display: flex; flex-direction: column;">
                 <h3 th:text="${p.titulo}"
                     style="margin: 0 0 25px 0; font-size: 1.1rem; color: #e6edf3; flex-grow: 1; display: flex; align-items: center; justify-content: center;">
                     Título de Película
                 </h3>
 
                 <div class="card-buttons" style="margin-top: auto;">
-                    <a th:href="@{/peliculas/detalle/{id}(id=${p.id})}"
-                       style="background: linear-gradient(45deg, #007bbd, #00d2ff); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; font-weight: bold; display: block; transition: opacity 0.3s;">
+<!--                    <a th:href="@{/detalle}"-->
+<!--                       style="background: linear-gradient(45deg, #007bbd, #00d2ff); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; font-weight: bold; display: block; transition: opacity 0.3s;">-->
+<!--                        Ver Detalles-->
+<!--                    </a>-->
+                    <a th:href="@{/detalle/{id}(id=${p.id})}"
+                       style="background: linear-gradient(45deg, #007bbd, #00d2ff); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; font-weight: bold; display: block; text-align: center;">
                         Ver Detalles
                     </a>
                 </div>
