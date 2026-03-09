@@ -25,13 +25,13 @@ public class MainController {
 
     @GetMapping("/")
     public String getMainPage(Model model) {
-        // 1. Cargamos los géneros para el buscador
-        List<Genero> genresList = gs.getAllGeneros();
-        model.addAttribute("genreList", genresList);
 
-        // 2. Cargamos las películas para la cuadrícula (PASO FALTANTE)
+        List<Genero> genresList = gs.getAllGeneros();
+        model.addAttribute("listaGeneros", genresList);
+
         List<Pelicula> todasLasPelis = ps.getAllPeliculas(); // Asegurar de que este método existe en el service
         model.addAttribute("peliculas", todasLasPelis);
+        model.addAttribute("generosexistentes",gs.getAllGeneros());
 
         return "index"; // según se llame el archivo html
     }

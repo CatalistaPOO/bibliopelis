@@ -28,7 +28,7 @@
             <select name="buscarGenero"
                     style="background: #0d1117; border: 1px solid #30363d; color: white; padding: 10px; border-radius: 5px; flex-grow: 1;">
                 <option value="0">Todos los géneros</option>
-                <option th:each="g : ${generos}"
+                <option th:each="g : ${generosexistentes}"
                         th:value="${g.idGenero}"
                         th:text="${g.nombre}">Género
                 </option>
@@ -38,11 +38,19 @@
                    style="background: #0d1117; border: 1px solid #30363d; color: white; padding: 10px; border-radius: 5px; flex-grow: 1;"
                    th:value="${buscarTitulo} ">
 
-
             <button type="submit"
                     style="background: linear-gradient(45deg, #007bbd, #00d2ff); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">
                 Buscar
             </button>
+
+            <!--            Seria aquí mostrar el texto: Encontrados que está junto a un cuadro en azul electrico del css y texto blanco que corresponderia al controlador en numeroResultados-->
+            <div th:if="${numeroResultados != null}"
+                 style="display: flex; align-items: center; gap: 10px; margin-left: auto;">
+                <span style="font-size: 0.9rem; color: #8b949e;">Encontrados:</span>
+                <span style="background: #00d2ff; color: #ffffff; padding: 5px 12px; border-radius: 4px; font-weight: bold; box-shadow: 0 0 10px #00d2ff;">
+            [[${numeroResultados}]]
+        </span>
+            </div>
         </form>
     </section>
 
@@ -73,10 +81,6 @@
                 </h3>
 
                 <div class="card-buttons" style="margin-top: auto;">
-                    <!--                    <a th:href="@{/detalle}"-->
-                    <!--                       style="background: linear-gradient(45deg, #007bbd, #00d2ff); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; font-weight: bold; display: block; transition: opacity 0.3s;">-->
-                    <!--                        Ver Detalles-->
-                    <!--                    </a>-->
                     <a th:href="@{/detalle/{id}(id=${p.id})}"
                        style="background: linear-gradient(45deg, #007bbd, #00d2ff); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; font-weight: bold; display: block; text-align: center;">
                         Ver Detalles
