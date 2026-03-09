@@ -44,37 +44,37 @@ public class MainController {
         return "creargeneros";
     }
 
-    @GetMapping("/crearpeli")
-    public String crearpelicula(Model model) {
-        model.addAttribute("peli", new Pelicula());
-        // Enviamos todos los géneros que hay en la base de datos
-        model.addAttribute("listaGeneros", gs.getAllGeneros());
-        return "crearpeli";
-    }
-
-    @PostMapping("/crearpeli")
-    public String creapeli(@ModelAttribute Pelicula peli, Model model) {
-        this.ps.createPeli(peli);
-        return "redirect:/";
-    }
-
-    @GetMapping("/detalle/{id}") // <-- Verifica que tenga el /{id}
-    public String detallepeli(@PathVariable("id") int id, Model model) {
-        Pelicula pelidetalle = this.ps.getPeliById(id);
-
-        if (pelidetalle == null) {
-            return "redirect:/"; // Si la peli no existe, vuelve al index
-        }
-
-        model.addAttribute("peli", pelidetalle);
-        return "detalle";
-    }
-
-    @PostMapping ("deletePeli")
-    public String deletePeli(@ModelAttribute Pelicula peli){
-        this.ps.deletePeli(peli);
-        return "redirect:/";
-    }
+//    @GetMapping("/crearpeli")
+//    public String crearpelicula(Model model) {
+//        model.addAttribute("peli", new Pelicula());
+//        // Enviamos todos los géneros que hay en la base de datos
+//        model.addAttribute("listaGeneros", gs.getAllGeneros());
+//        return "crearpeli";
+//    }
+//
+//    @PostMapping("/crearpeli")
+//    public String creapeli(@ModelAttribute Pelicula peli, Model model) {
+//        this.ps.createPeli(peli);
+//        return "redirect:/";
+//    }
+//
+//    @GetMapping("/detalle/{id}") // <-- Verifica que tenga el /{id}
+//    public String detallepeli(@PathVariable("id") int id, Model model) {
+//        Pelicula pelidetalle = this.ps.getPeliById(id);
+//
+//        if (pelidetalle == null) {
+//            return "redirect:/"; // Si la peli no existe, vuelve al index
+//        }
+//
+//        model.addAttribute("peli", pelidetalle);
+//        return "detalle";
+//    }
+//
+//    @PostMapping ("deletePeli")
+//    public String deletePeli(@ModelAttribute Pelicula peli){
+//        this.ps.deletePeli(peli);
+//        return "redirect:/";
+//    }
 
 
 }

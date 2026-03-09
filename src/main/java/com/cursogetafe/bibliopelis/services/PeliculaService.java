@@ -5,6 +5,7 @@ import com.cursogetafe.bibliopelis.repository.IPeliculaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PeliculaService {
@@ -24,11 +25,21 @@ public class PeliculaService {
     }
 
     public void deletePeli(Pelicula peli) {
-         iPeliRepo.deleteById(peli.getId());
+        iPeliRepo.deleteById(peli.getId());
     }
 
     public Pelicula getPeliById(int id) {
         return iPeliRepo.findById(id).orElse(null);
+    }
+
+    public List<Pelicula> findByTitleAndGenre(String titulo, int idGenero) {
+        List<Pelicula> pelis;
+        if (idGenero == 0) {
+            pelis = iPeliRepo.findByTituloContaining(titulo);
+        } else {
+            pelis = iPeliRepo.findByTituloContainingAndGeneroIdGenero(titulo, idGenero);
+        }
+        return pelis;
     }
 
 }
