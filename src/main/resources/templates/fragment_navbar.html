@@ -1,0 +1,10 @@
+<!--Este archivo funciona como si fuese un macro que se inserta en varias paginas,
+pendiente de revisar etiquetas y componentes para insertar en los html-->
+
+<nav id="barra-navegacion" th:fragment="navBar">
+    <img src="/banner.jpg">
+    <ul class="navbar">
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/pelicula/create}">New pelicula</a></li>
+    </ul>
+</nav>
