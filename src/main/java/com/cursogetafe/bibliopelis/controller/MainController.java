@@ -36,6 +36,7 @@ public class MainController {
         return "index"; // según se llame el archivo html
     }
 
+    //este mapping es un apaño rapido para crear los generos, debería hacerse de otra manera
     @GetMapping("/creargeneros")
     public String createGeneros(Model model) {
         for (int i = 0; i < 10; i++) {

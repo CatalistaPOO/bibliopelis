@@ -1,10 +1,15 @@
 <!--Este archivo funciona como si fuese un macro que se inserta en varias paginas,
-pendiente de revisar etiquetas y componentes para insertar en los html-->
+pendiente de revisar etiquetas y componentes ver prueba de insercion en detalle.html -->
 
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
 <nav id="barra-navegacion" th:fragment="navBar">
-    <img src="/banner.jpg">
+    <img th:src="@{/banner.jpg}" alt="Banner BiblioPelis" style="width: 100%; max-height: 150px; object-fit: cover;">
     <ul class="navbar">
         <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/pelicula/create}">New pelicula</a></li>
+        <li><a th:href="@{/crearpeli}">Nueva Película</a></li>
     </ul>
 </nav>
+</body>
+</html>
