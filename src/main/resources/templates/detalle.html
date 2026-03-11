@@ -1,3 +1,65 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="es">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title th:text="${peli != null ? peli.titulo : 'Detalle'} + ' - BiblioPelis'">Detalle - BiblioPelis</title>-->
+<!--    <link rel="stylesheet" th:href="@{/style.css}">-->
+<!--</head>-->
+<!--<body class="detail-page" style="background-color: #0a0b10; color: #e6edf3; font-family: sans-serif;">-->
+
+<!--&lt;!&ndash;Esta linea equivale a insertar fragment-navbar.html &ndash;&gt;-->
+<!--<div th:replace="~{fragment_navbar :: navBar}"></div>-->
+
+<!--<div class="container" style="max-width: 1000px; margin: 0 auto; padding: 40px;">-->
+<!--&lt;!&ndash;    <a th:href="@{/}" class="btn-back" style="color: #00d2ff; text-decoration: none;">← Volver al catálogo</a>&ndash;&gt;-->
+
+<!--    <div th:if="${peli != null}" class="detail-wrapper" style="display: flex; gap: 40px; margin-top: 30px;">-->
+
+<!--        <div class="detail-media">-->
+<!--            <img th:src="${peli.urlThumbnail}"-->
+<!--                 th:alt="${peli.titulo}"-->
+<!--                 style="width: 350px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"-->
+<!--                 onerror="this.src='https://via.placeholder.com/400x600?text=Sin+Poster'">-->
+<!--        </div>-->
+
+<!--        <div class="detail-content" style="flex: 1;">-->
+<!--            <span class="genre-label"-->
+<!--                  th:if="${peli.genero != null}"-->
+<!--                  th:text="${peli.genero.nombre}"-->
+<!--                  style="background: #00d2ff; color: black; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.8rem;">-->
+<!--                Género-->
+<!--            </span>-->
+
+<!--            <h1 th:text="${peli.titulo}" style="font-size: 3rem; margin: 15px 0;">Título</h1>-->
+
+<!--            <div class="action-bar" style="margin-top: 30px; display: flex; gap: 15px;">-->
+<!--                <button class="btn-play"-->
+<!--                        style="background: #00d2ff; border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; cursor: pointer;">-->
+<!--                    ▶ Reproducir-->
+<!--                </button>-->
+
+<!--                <form th:action="@{/deletePeli}" method="post" style="display: inline;">-->
+<!--                    <input type="hidden" name="id" th:value="${peli.id}" />-->
+
+<!--                    <button type="submit" class="btn-delete"-->
+<!--                            style="background: #f85149; color: white; border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; cursor: pointer;">-->
+<!--                        Eliminar Película-->
+<!--                    </button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div th:unless="${peli != null}" style="text-align: center; margin-top: 50px;">-->
+<!--        <h2>Lo sentimos, la película no existe.</h2>-->
+<!--        <a th:href="@{/}" style="color: #00d2ff;">Volver al inicio</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
@@ -5,57 +67,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${peli != null ? peli.titulo : 'Detalle'} + ' - BiblioPelis'">Detalle - BiblioPelis</title>
     <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Suaviza el salto al pulsar Reproducir */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
-<body class="detail-page" style="background-color: #0a0b10; color: #e6edf3; font-family: sans-serif;">
+<body class="detail-page" style="background-color: #0a0b10; color: #e6edf3; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0;">
 
-<!--Esta linea equivale a insertar fragment-navbar.html -->
 <div th:replace="~{fragment_navbar :: navBar}"></div>
 
-<div class="container" style="max-width: 1000px; margin: 0 auto; padding: 40px;">
-<!--    <a th:href="@{/}" class="btn-back" style="color: #00d2ff; text-decoration: none;">← Volver al catálogo</a>-->
+<main class="container" style="max-width: 1000px; margin: 0 auto; padding: 40px;">
 
-    <div th:if="${peli != null}" class="detail-wrapper" style="display: flex; gap: 40px; margin-top: 30px;">
+    <div th:if="${peli != null}">
+        <div class="detail-wrapper" style="display: flex; gap: 40px; margin-top: 30px; align-items: flex-start;">
 
-        <div class="detail-media">
-            <img th:src="${peli.urlThumbnail}"
-                 th:alt="${peli.titulo}"
-                 style="width: 350px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"
-                 onerror="this.src='https://via.placeholder.com/400x600?text=Sin+Poster'">
+            <div class="detail-media">
+                <img th:src="${peli.urlThumbnail}"
+                     th:alt="${peli.titulo}"
+                     style="width: 350px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #30363d;"
+                     onerror="this.src='https://via.placeholder.com/400x600/0d1117/00d2ff?text=Sin+Poster'">
+            </div>
+
+            <div class="detail-content" style="flex: 1;">
+                <span class="genre-label"
+                      th:if="${peli.genero != null}"
+                      th:text="${peli.genero.nombre}"
+                      style="background: #00d2ff; color: black; padding: 6px 15px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; display: inline-block;">
+                    Género
+                </span>
+
+                <h1 th:text="${peli.titulo}" style="font-size: 3.5rem; margin: 15px 0; color: #00d2ff; line-height: 1.1;">Título</h1>
+
+                <div class="action-bar" style="margin-top: 40px; display: flex; gap: 15px; align-items: center;">
+
+                    <a href="#reproductor" class="btn-play"
+                       style="background: #00d2ff; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 6px; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; transition: transform 0.2s;">
+                        <i class="fa-solid fa-play"></i> Reproducir Video
+                    </a>
+
+                    <form th:action="@{/deletePeli}" method="post" style="display: inline;"
+                          onsubmit="return confirm('¿Seguro que quieres eliminar esta película?')">
+                        <input type="hidden" name="id" th:value="${peli.id}" />
+                        <button type="submit" class="btn-delete"
+                                style="background: transparent; color: #f85149; border: 1px solid #f85149; padding: 13px 25px; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                            <i class="fa-solid fa-trash"></i> Eliminar
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
 
-        <div class="detail-content" style="flex: 1;">
-            <span class="genre-label"
-                  th:if="${peli.genero != null}"
-                  th:text="${peli.genero.nombre}"
-                  style="background: #00d2ff; color: black; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.8rem;">
-                Género
-            </span>
+        <hr style="border: 0; border-top: 1px solid #30363d; margin: 60px 0;">
 
-            <h1 th:text="${peli.titulo}" style="font-size: 3rem; margin: 15px 0;">Título</h1>
+        <div id="reproductor" style="padding-top: 20px;">
+            <h2 style="text-align: center; margin-bottom: 25px; color: #00d2ff;">Reproductor Digital</h2>
 
-            <div class="action-bar" style="margin-top: 30px; display: flex; gap: 15px;">
-                <button class="btn-play"
-                        style="background: #00d2ff; border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; cursor: pointer;">
-                    ▶ Reproducir
-                </button>
 
-                <form th:action="@{/deletePeli}" method="post" style="display: inline;">
-                    <input type="hidden" name="id" th:value="${peli.id}" />
+            <div th:if="${peli.urlVideo != null && !peli.urlVideo.empty}"
+                 style="width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 0 40px rgba(0, 210, 255, 0.15); border: 1px solid #30363d;">
 
-                    <button type="submit" class="btn-delete"
-                            style="background: #f85149; color: white; border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; cursor: pointer;">
-                        Eliminar Película
-                    </button>
-                </form>
+<!--                <iframe width="100%" height="100%"-->
+<!--                        th:src="${#strings.contains(peli.urlVideo, 'watch?v=') ? #strings.replace(peli.urlVideo, 'watch?v=', 'embed/') : peli.urlVideo}"-->
+<!--                        frameborder="0"-->
+<!--                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"-->
+<!--                        allowfullscreen>-->
+<!--                </iframe>-->
+                <iframe width="100%" height="100%"
+                        th:src="${peli.urlVideo.contains('watch?v=') ?
+                 'https://www.youtube.com/embed/' + peli.urlVideo.substring(peli.urlVideo.indexOf('v=') + 2).split('&')[0] :
+                 peli.urlVideo}"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+
+            <div th:unless="${peli.urlVideo != null && !peli.urlVideo.empty}"
+                 style="text-align: center; padding: 60px; background: #161b22; border-radius: 12px; border: 1px dashed #30363d;">
+                <i class="fa-solid fa-video-slash" style="font-size: 3rem; color: #30363d; margin-bottom: 15px;"></i>
+                <p style="color: #8b949e; font-size: 1.1rem;">Esta película aún no dispone de un enlace de vídeo.</p>
             </div>
         </div>
     </div>
 
-    <div th:unless="${peli != null}" style="text-align: center; margin-top: 50px;">
-        <h2>Lo sentimos, la película no existe.</h2>
-        <a th:href="@{/}" style="color: #00d2ff;">Volver al inicio</a>
+    <div th:unless="${peli != null}" style="text-align: center; margin-top: 100px;">
+        <i class="fa-solid fa-circle-exclamation" style="font-size: 4rem; color: #f85149;"></i>
+        <h2 style="margin-top: 20px;">Película no encontrada</h2>
+        <p style="color: #8b949e;">Es posible que haya sido eliminada o el enlace sea incorrecto.</p>
+        <a th:href="@{/}" style="color: #00d2ff; text-decoration: none; font-weight: bold; margin-top: 20px; display: inline-block;">
+            <i class="fa-solid fa-house"></i> Volver al Catálogo
+        </a>
     </div>
-</div>
+
+</main>
+
+<footer style="margin-top: 80px; padding: 40px; text-align: center; border-top: 1px solid #30363d; color: #8b949e; font-size: 0.9rem;">
+    &copy; 2026 BiblioPelis - Tu Videoteca Personal
+</footer>
 
 </body>
 </html>
