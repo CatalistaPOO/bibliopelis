@@ -9,10 +9,10 @@
 <body class="detail-page" style="background-color: #0a0b10; color: #e6edf3; font-family: sans-serif;">
 
 <!--Esta linea equivale a insertar fragment-navbar.html -->
-<!--<div th:replace="~{fragment_navbar :: navBar}"></div>-->
+<div th:replace="~{fragment_navbar :: navBar}"></div>
 
 <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 40px;">
-    <a th:href="@{/}" class="btn-back" style="color: #00d2ff; text-decoration: none;">← Volver al catálogo</a>
+<!--    <a th:href="@{/}" class="btn-back" style="color: #00d2ff; text-decoration: none;">← Volver al catálogo</a>-->
 
     <div th:if="${peli != null}" class="detail-wrapper" style="display: flex; gap: 40px; margin-top: 30px;">
 

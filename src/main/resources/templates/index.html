@@ -6,19 +6,26 @@
     <title>BiblioPelis - Tu Videoteca Digital</title>
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
+
+
+
 <body style="background-color: #0a0b10; color: #e6edf3; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; padding: 0;">
 
 <header style="padding: 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #30363d; background-color: #0a0b10;">
     <h1 style="margin: 0; font-size: 1.8rem; letter-spacing: 2px;">
         Biblio<span style="color: #00d2ff; text-shadow: 0 0 10px #00d2ff;">Pelis</span>
     </h1>
-    <nav>
-        <a th:href="@{/crearpeli}"
-           style="background: linear-gradient(45deg, #007bbd, #00d2ff); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; font-weight: bold; display: inline-block;">
-            + Añadir Película
-        </a>
-    </nav>
+
+<!--    <nav>-->
+<!--        <a th:href="@{/crearpeli}"-->
+<!--           style="background: linear-gradient(45deg, #007bbd, #00d2ff); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; font-weight: bold; display: inline-block;">-->
+<!--            + Añadir Película-->
+<!--        </a>-->
+<!--    </nav>-->
 </header>
+
+<!--Esta linea equivale a insertar fragment-navbar.html -->
+<div th:replace="~{fragment_navbar :: navBar}"></div>
 
 <main class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
 
@@ -43,7 +50,6 @@
                 Buscar
             </button>
 
-            <!--            Seria aquí mostrar el texto: Encontrados que está junto a un cuadro en azul electrico del css y texto blanco que corresponderia al controlador en numeroResultados-->
             <div th:if="${numeroResultados != null}"
                  style="display: flex; align-items: center; gap: 10px; margin-left: auto;">
                 <span style="font-size: 0.9rem; color: #8b949e;">Encontrados:</span>

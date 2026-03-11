@@ -58,6 +58,7 @@ public class PeliculasController {
         model.addAttribute("generos", generoList);
         model.addAttribute("peliculas", peliculaList);
         model.addAttribute("numeroResultados", peliculaList.size());
+        model.addAttribute("generosexistentes", gs.getAllGeneros());
         return "index";
     }
 

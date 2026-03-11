@@ -1,15 +1,24 @@
-<!--Este archivo funciona como si fuese un macro que se inserta en varias paginas,
-pendiente de revisar etiquetas y componentes ver prueba de insercion en detalle.html -->
+<!--&lt;!&ndash;Este archivo funciona como si fuese un macro que se inserta en varias paginas,-->
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<nav id="barra-navegacion" th:fragment="navBar">
+<nav>
     <img th:src="@{/banner.jpg}" alt="Banner BiblioPelis" style="width: 100%; max-height: 150px; object-fit: cover;">
-    <ul class="navbar">
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/crearpeli}">Nueva Película</a></li>
-    </ul>
+</nav>
+<nav id="barra-navegacion" th:fragment="navBar"
+
+     style="display: flex; justify-content: center; align-items: center; gap: 20px; width: 100%; padding: 10px 0;">
+
+    <title>BiblioPelis - Tu Videoteca Digital</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+    <a th:href="@{/}" class="btn-back" style="color: #00d2ff; text-decoration: none; font-weight: bold;">Home</a>
+    <a th:href="@{/crearpeli}"
+       style="background: linear-gradient(45deg, #007bbd, #00d2ff); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; font-weight: bold; display: inline-block;">
+        + Añadir Película
+    </a>
+
 </nav>
 </body>
 </html>
